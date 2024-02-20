@@ -13,7 +13,7 @@ func SetupRoutes(e *echo.Echo, p *PlayerHandler, ah *AuthHandler) {
 	e.POST("/login", ah.loginHandler)
 	e.GET("/register", ah.registerHandler)
 	e.POST("/register", ah.registerHandler)
-	protectedGroup := e.Group("/player")
+	protectedGroup := e.Group("/player", ah.authMiddleware)
 	protectedGroup.GET("", p.HandlerShowPlayers)
 	protectedGroup.GET("/details/:id", p.HandlerShowPlayerById)
 }
