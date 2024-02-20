@@ -1,24 +1,26 @@
 package main
 
 import (
-	"net/http"
-
+	"github.com/gorilla/sessions"
 	"github.com/herdgolf/herdgolf/db"
 	"github.com/herdgolf/herdgolf/handlers"
 	"github.com/herdgolf/herdgolf/services"
+	"github.com/labstack/echo-contrib/session"
 	"github.com/labstack/echo/v4"
 )
 
+const (
+	SECRET_KEY = "secret"
+)
+
 func main() {
-	app := echo.New()
+	e := echo.New()
 
-	app.HTTPErrorHandler = handlers.CustomHTTPErrorHandler
+	e.HTTPErrorHandler = handlers.CustomHTTPErrorHandler
 
-	app.Static("/", "assets")
+	e.Static("/", "assets")
 
-	app.GET("/", func(c echo.Context) error {
-		return c.Redirect(http.StatusMovedPermanently, "/player")
-	})
+	e.Use(session.Middleware(sessions.NewCookieStore([]byte(SECRET_KEY))))
 
 	db.Init()
 	gorm := db.DB()
@@ -32,10 +34,11 @@ func main() {
 	dbGorm.Ping()
 
 	ps := services.NewServicesPlayer(services.Player{}, gorm)
+	ah := handlers.NewAuthHandler(ps)
 
 	p := handlers.New(ps)
 
-	handlers.SetupRoutes(app, p)
+	handlers.SetupRoutes(e, p, ah)
 
-	app.Logger.Fatal(app.Start(":8080"))
+	e.Logger.Fatal(e.Start(":8080"))
 }

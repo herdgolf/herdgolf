@@ -48,7 +48,7 @@ func Show(players []*services.Player) templ.Component {
 				var templ_7745c5c3_Var2 string
 				templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(strconv.Itoa(int(player.ID)))
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `show.templ`, Line: 29, Col: 42}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/player/show.templ`, Line: 29, Col: 42}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 				if templ_7745c5c3_Err != nil {
@@ -68,9 +68,9 @@ func Show(players []*services.Player) templ.Component {
 					return templ_7745c5c3_Err
 				}
 				var templ_7745c5c3_Var4 string
-				templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(player.Name)
+				templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(player.Username)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `show.templ`, Line: 34, Col: 25}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/player/show.templ`, Line: 34, Col: 29}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 				if templ_7745c5c3_Err != nil {
@@ -81,9 +81,9 @@ func Show(players []*services.Player) templ.Component {
 					return templ_7745c5c3_Err
 				}
 				var templ_7745c5c3_Var5 string
-				templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(player.Name)
+				templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(player.Email)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `show.templ`, Line: 38, Col: 25}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/player/show.templ`, Line: 38, Col: 26}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 				if templ_7745c5c3_Err != nil {
@@ -115,7 +115,14 @@ func Show(players []*services.Player) templ.Component {
 	})
 }
 
-func ShowIndex(title string, cmp templ.Component) templ.Component {
+func ShowIndex(
+	title,
+	username string,
+	fromProtected bool,
+	isError bool,
+	errMsgs, sucMsgs []string,
+	cmp templ.Component,
+) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -143,7 +150,7 @@ func ShowIndex(title string, cmp templ.Component) templ.Component {
 			}
 			return templ_7745c5c3_Err
 		})
-		templ_7745c5c3_Err = layout.Base(title).Render(templ.WithChildren(ctx, templ_7745c5c3_Var7), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = layout.Base(title, username, fromProtected, isError, errMsgs, sucMsgs).Render(templ.WithChildren(ctx, templ_7745c5c3_Var7), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

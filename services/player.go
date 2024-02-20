@@ -3,20 +3,24 @@ package services
 import (
 	"time"
 
+	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 )
 
 type Player struct {
 	gorm.Model
-	Name      string `json:"name"`
-	ProfileID int
-	Profile   Profile
+	Name     string `json:"name"`
+	Email    string `json:"email"`
+	Password string `json:"password"`
+	Username string `json:"username"`
+	// ProfileID int
+	// Profile   Profile
 }
 
-type Profile struct {
-	Link string `json:"link"`
-	ID   int
-}
+// type Profile struct {
+// 	Link string `json:"link"`
+// 	ID   int
+// }
 
 func NewServicesPlayer(p Player, db *gorm.DB) *ServicesPlayer {
 	return &ServicesPlayer{
@@ -48,6 +52,37 @@ func (sp *ServicesPlayer) GetPlayerById(id int) (Player, error) {
 	}
 
 	return *players[0], nil
+}
+
+func (sp *ServicesPlayer) CreatePlayer(p Player) error {
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(p.Password), 8)
+	if err != nil {
+		return err
+	}
+
+	newP := Player{
+		Email:    p.Email,
+		Username: p.Username,
+		Name:     p.Name,
+		// Profile:  Profile{Link: p.Profile.Link},
+		Password: string(hashedPassword),
+	}
+
+	if err := sp.DB.Create(&newP).Error; err != nil {
+		return err
+	}
+
+	return err
+}
+
+func (sp *ServicesPlayer) CheckEmail(email string) (Player, error) {
+	var p Player
+
+	if err := sp.DB.Where("email = ?", email).First(&p).Error; err != nil {
+		return p, err
+	}
+
+	return p, nil
 }
 
 func ConverDateTime(tz string, dt time.Time) string {

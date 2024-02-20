@@ -32,11 +32,11 @@ templ Show(players []*services.Player) {
           <a hx-swap="transition:true" hx-headers="js:{'X-TimeZone': Intl.DateTimeFormat().resolvedOptions().timeZone}"
             class="hover:text-sky-500 ease-in duration-300 hover:underline flex gap-2 justify-between" href={
             templ.URL(fmt.Sprintf("/player/details/%d", player.ID)) }>
-            { player.Name }
+            { player.Username }
             <img class="hover:scale-[1.2] ease-in duration-300" src="/img/info_icon.svg" alt="Info icon" />
           </a>
         </td>
-        <td>{ player.Name }</td>
+        <td>{ player.Email }</td>
         <!-- <td class="flex justify-center gap-2">
 								Created At
 							</td> -->
@@ -56,8 +56,15 @@ templ Show(players []*services.Player) {
 </section>
 }
 
-templ ShowIndex(title string, cmp templ.Component) {
-@layout.Base(title) {
+templ ShowIndex(
+title,
+username string,
+fromProtected bool,
+isError bool,
+errMsgs, sucMsgs []string,
+cmp templ.Component,
+) {
+@layout.Base(title, username, fromProtected, isError, errMsgs, sucMsgs) {
 @cmp
 }
 }

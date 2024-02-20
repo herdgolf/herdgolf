@@ -33,8 +33,19 @@ func (ph *PlayerHandler) HandlerShowPlayers(c echo.Context) error {
 		return err
 	}
 
-	si := player.ShowIndex("| Home", player.Show(players))
-	return ph.View(c, si)
+	// showView := player.Show(players)
+
+	// si := player.ShowIndex("| Home", player.Show(players))
+	// return ph.View(c, si)
+	return ph.View(c, player.ShowIndex(
+		"| Home",
+		"",
+		fromProtected,
+		isError,
+		getFlashmessages(c, "error"),
+		getFlashmessages(c, "success"),
+		player.Show(players),
+	))
 }
 
 func (ph *PlayerHandler) HandlerShowPlayerById(c echo.Context) error {
@@ -53,14 +64,25 @@ func (ph *PlayerHandler) HandlerShowPlayerById(c echo.Context) error {
 		return err
 	}
 
-	di := player.DetailsIndex(
+	// di := player.DetailsIndex(
+	// 	fmt.Sprintf("| User details %s",
+	// 		cases.Title(language.English).String(pdata.Name),
+	// 	),
+	// 	player.Details(tz, pdata),
+	// )
+
+	// return ph.View(c, di)
+	return ph.View(c, player.DetailsIndex(
 		fmt.Sprintf("| User details %s",
 			cases.Title(language.English).String(pdata.Name),
 		),
+		"",
+		fromProtected,
+		isError,
+		getFlashmessages(c, "error"),
+		getFlashmessages(c, "success"),
 		player.Details(tz, pdata),
-	)
-
-	return ph.View(c, di)
+	))
 }
 
 func (ph *PlayerHandler) View(c echo.Context, cmp templ.Component) error {

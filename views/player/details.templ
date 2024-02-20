@@ -13,13 +13,13 @@ templ Details(tz string, player services.Player) {
 <section class="card w-96 bg-base-300 shadow-xl mx-auto mt-12">
   <div class="card-body flex flex-col gap-6">
     <h1 class="card-title capitalize text-secondary text-2xl italic">
-      { player.Name }
+      { player.Username }
     </h1>
     <ul class="flex flex-col gap-2 list-disc marker:text-secondary text-sm text-secondary font-semibold">
       <li>
         Email:&nbsp;&nbsp;
         <span class="text-neutral-content font-light">
-          { player.Name }
+          { player.Email }
         </span>
       </li>
       <li>
@@ -42,8 +42,15 @@ templ Details(tz string, player services.Player) {
 </section>
 }
 
-templ DetailsIndex(title string, cmp templ.Component) {
-@layout.Base(title) {
+templ DetailsIndex(
+title,
+username string,
+fromProtected bool,
+isError bool,
+errMsgs, sucMsgs []string,
+cmp templ.Component,
+) {
+@layout.Base(title, username, fromProtected, isError, errMsgs, sucMsgs) {
 @cmp
 }
 }
