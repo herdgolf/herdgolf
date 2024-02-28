@@ -9,18 +9,16 @@ import (
 )
 
 templ Show(players []*services.Player) {
-<h1 class="text-3xl text-center font-bold">
+<h1>
   Player List
 </h1>
-<section class="overflow-auto max-w-2xl max-h-96 mx-auto mt-12 bg-slate-600 rounded-lg shadow-xl">
-  <table class="table table-zebra">
-    <!-- head -->
-    <thead class="bg-slate-700">
+<section>
+  <table>
+    <thead>
       <tr>
         <th></th>
         <th>Username</th>
-        <th class="text-center">Email</th>
-        <!-- <th class="text-center">Created At</th> -->
+        <th>Email</th>
       </tr>
     </thead>
     if len(players) != 0 {
@@ -33,20 +31,17 @@ templ Show(players []*services.Player) {
             class="hover:text-sky-500 ease-in duration-300 hover:underline flex gap-2 justify-between" href={
             templ.URL(fmt.Sprintf("/player/details/%d", player.ID)) }>
             { player.Username }
-            <img class="hover:scale-[1.2] ease-in duration-300" src="/img/info_icon.svg" alt="Info icon" />
+            <img src="/img/info_icon.svg" alt="Info icon" />
           </a>
         </td>
         <td>{ player.Email }</td>
-        <!-- <td class="flex justify-center gap-2">
-								Created At
-							</td> -->
       </tr>
       }
     </tbody>
     } else {
     <tbody>
       <tr>
-        <td colspan="4" align="center">
+        <td>
           There are no users to show yet
         </td>
       </tr>

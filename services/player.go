@@ -90,3 +90,28 @@ func ConverDateTime(tz string, dt time.Time) string {
 
 	return dt.In(loc).Format(time.RFC822Z)
 }
+
+func (sp *ServicesPlayer) UpdatePlayer(player Player) error {
+	existingPlayer := new(Player)
+
+	if res := sp.DB.Find(&existingPlayer, "id = ?", player.ID); res.Error != nil {
+		return res.Error
+	}
+
+	if player.Name != "" {
+		existingPlayer.Name = player.Name
+	}
+
+	if player.Username != "" {
+		existingPlayer.Username = player.Username
+	}
+	if player.Email != "" {
+		existingPlayer.Email = player.Email
+	}
+
+	if err := sp.DB.Save(&existingPlayer).Error; err != nil {
+		return err
+	}
+
+	return nil
+}

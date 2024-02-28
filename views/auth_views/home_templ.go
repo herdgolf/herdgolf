@@ -25,12 +25,12 @@ func Home(fromProtected bool) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"mx-auto w-fit flex flex-col gap-8 text-center\"><h1 class=\"text-5xl font-bold\">Welcome to your TodoList !!</h1><p class=\"text-2xl font-thin\">Here you can keep track of all your tasks and have an overview of your responsibilities.</p>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section><h1>Welcome to Herd Golf !!</h1><p>Create new rouds, courses, etc.</p>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		if !fromProtected {
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<hr class=\"my-4 w-4/5 mx-auto opacity-25\"><p class=\"text-base font-thin\">You have an account?</p><footer class=\"flex gap-4 justify-center\"><a hx-swap=\"transition:true\" href=\"/login\" class=\"badge badge-primary px-6 py-4 hover:scale-[1.1] text-lg font-thin\">Log In</a> <a hx-swap=\"transition:true\" href=\"/register\" class=\"badge badge-neutral px-6 py-4 hover:scale-[1.1] text-lg font-thin\">Sign Up</a></footer>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<hr><p>You have an account?</p><footer><a hx-swap=\"transition:true\" href=\"/login\">Log In</a> <a hx-swap=\"transition:true\" href=\"/register\">Sign Up</a></footer>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

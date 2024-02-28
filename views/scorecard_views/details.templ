@@ -1,0 +1,135 @@
+package scorecard_views
+
+import (
+"strconv"
+"github.com/herdgolf/herdgolf/services"
+"github.com/herdgolf/herdgolf/views/layout"
+)
+
+templ Details(tz string, scorecard services.ScoreCard) {
+<h1>
+  Scorecard details
+</h1>
+<article>
+  <header>
+    <mark>
+      { scorecard.Tee } - Par { strconv.Itoa(scorecard.Par) }
+    </mark>
+  </header>
+  <table>
+    <thead>
+      <tr>
+        <th>Hole</th>
+        <td>{ strconv.Itoa(scorecard.Holes[0].Number) }</td>
+        <td>{ strconv.Itoa(scorecard.Holes[1].Number) }</td>
+        <td>{ strconv.Itoa(scorecard.Holes[2].Number) }</td>
+        <td>{ strconv.Itoa(scorecard.Holes[3].Number) }</td>
+        <td>{ strconv.Itoa(scorecard.Holes[4].Number) }</td>
+        <td>{ strconv.Itoa(scorecard.Holes[5].Number) }</td>
+        <td>{ strconv.Itoa(scorecard.Holes[6].Number) }</td>
+        <td>{ strconv.Itoa(scorecard.Holes[7].Number) }</td>
+        <td>{ strconv.Itoa(scorecard.Holes[8].Number) }</td>
+        <th>OUT</th>
+      </tr>
+    </thead>
+    <tr>
+      <th>Par</th>
+      <td>{ strconv.Itoa(scorecard.Holes[0].Par) }</td>
+      <td>{ strconv.Itoa(scorecard.Holes[1].Par) }</td>
+      <td>{ strconv.Itoa(scorecard.Holes[2].Par) }</td>
+      <td>{ strconv.Itoa(scorecard.Holes[3].Par) }</td>
+      <td>{ strconv.Itoa(scorecard.Holes[4].Par) }</td>
+      <td>{ strconv.Itoa(scorecard.Holes[5].Par) }</td>
+      <td>{ strconv.Itoa(scorecard.Holes[6].Par) }</td>
+      <td>{ strconv.Itoa(scorecard.Holes[7].Par) }</td>
+      <td>{ strconv.Itoa(scorecard.Holes[8].Par) }</td>
+      <td>
+        { strconv.Itoa(scorecard.Holes[0].Par + scorecard.Holes[1].Par + scorecard.Holes[2].Par +
+        scorecard.Holes[3].Par + scorecard.Holes[4].Par + scorecard.Holes[5].Par + scorecard.Holes[6].Par +
+        scorecard.Holes[7].Par + scorecard.Holes[8].Par) }
+      </td>
+    </tr>
+    <tr>
+      <th>HCP</th>
+      <td>{ strconv.Itoa(scorecard.Holes[0].StrokeIndex) }</td>
+      <td>{ strconv.Itoa(scorecard.Holes[1].StrokeIndex) }</td>
+      <td>{ strconv.Itoa(scorecard.Holes[2].StrokeIndex) }</td>
+      <td>{ strconv.Itoa(scorecard.Holes[3].StrokeIndex) }</td>
+      <td>{ strconv.Itoa(scorecard.Holes[4].StrokeIndex) }</td>
+      <td>{ strconv.Itoa(scorecard.Holes[5].StrokeIndex) }</td>
+      <td>{ strconv.Itoa(scorecard.Holes[6].StrokeIndex) }</td>
+      <td>{ strconv.Itoa(scorecard.Holes[7].StrokeIndex) }</td>
+      <td>{ strconv.Itoa(scorecard.Holes[8].StrokeIndex) }</td>
+    </tr>
+  </table>
+  <table>
+    <thead>
+      <tr>
+        <th>Hole</th>
+        <td>{ strconv.Itoa(scorecard.Holes[9].Number) }</td>
+        <td>{ strconv.Itoa(scorecard.Holes[10].Number) }</td>
+        <td>{ strconv.Itoa(scorecard.Holes[11].Number) }</td>
+        <td>{ strconv.Itoa(scorecard.Holes[12].Number) }</td>
+        <td>{ strconv.Itoa(scorecard.Holes[13].Number) }</td>
+        <td>{ strconv.Itoa(scorecard.Holes[14].Number) }</td>
+        <td>{ strconv.Itoa(scorecard.Holes[15].Number) }</td>
+        <td>{ strconv.Itoa(scorecard.Holes[16].Number) }</td>
+        <td>{ strconv.Itoa(scorecard.Holes[17].Number) }</td>
+        <th>IN</th>
+        <th>TOTAL</th>
+      </tr>
+    </thead>
+    <tr>
+      <th>Par</th>
+      <td>{ strconv.Itoa(scorecard.Holes[9].Par) }</td>
+      <td>{ strconv.Itoa(scorecard.Holes[10].Par) }</td>
+      <td>{ strconv.Itoa(scorecard.Holes[11].Par) }</td>
+      <td>{ strconv.Itoa(scorecard.Holes[12].Par) }</td>
+      <td>{ strconv.Itoa(scorecard.Holes[13].Par) }</td>
+      <td>{ strconv.Itoa(scorecard.Holes[14].Par) }</td>
+      <td>{ strconv.Itoa(scorecard.Holes[15].Par) }</td>
+      <td>{ strconv.Itoa(scorecard.Holes[16].Par) }</td>
+      <td>{ strconv.Itoa(scorecard.Holes[17].Par) }</td>
+      <td>
+        { strconv.Itoa(scorecard.Holes[9].Par + scorecard.Holes[10].Par +
+        scorecard.Holes[11].Par +
+        scorecard.Holes[12].Par + scorecard.Holes[13].Par + scorecard.Holes[14].Par + scorecard.Holes[15].Par +
+        scorecard.Holes[16].Par + scorecard.Holes[17].Par) }
+      </td>
+      <td>
+        { strconv.Itoa(scorecard.Holes[0].Par + scorecard.Holes[1].Par + scorecard.Holes[2].Par +
+        scorecard.Holes[3].Par + scorecard.Holes[4].Par + scorecard.Holes[5].Par + scorecard.Holes[6].Par +
+        scorecard.Holes[7].Par + scorecard.Holes[8].Par + scorecard.Holes[9].Par + scorecard.Holes[10].Par +
+        scorecard.Holes[11].Par +
+        scorecard.Holes[12].Par + scorecard.Holes[13].Par + scorecard.Holes[14].Par + scorecard.Holes[15].Par +
+        scorecard.Holes[16].Par + scorecard.Holes[17].Par) }
+      </td>
+    </tr>
+    <tr>
+      <th>HCP</th>
+      <td>{ strconv.Itoa(scorecard.Holes[9].StrokeIndex) }</td>
+      <td>{ strconv.Itoa(scorecard.Holes[10].StrokeIndex) }</td>
+      <td>{ strconv.Itoa(scorecard.Holes[11].StrokeIndex) }</td>
+      <td>{ strconv.Itoa(scorecard.Holes[12].StrokeIndex) }</td>
+      <td>{ strconv.Itoa(scorecard.Holes[13].StrokeIndex) }</td>
+      <td>{ strconv.Itoa(scorecard.Holes[14].StrokeIndex) }</td>
+      <td>{ strconv.Itoa(scorecard.Holes[15].StrokeIndex) }</td>
+      <td>{ strconv.Itoa(scorecard.Holes[16].StrokeIndex) }</td>
+      <td>{ strconv.Itoa(scorecard.Holes[17].StrokeIndex) }</td>
+    </tr>
+  </table>
+</article>
+}
+
+templ DetailsIndex(
+title,
+username string,
+fromProtected bool,
+isError bool,
+errMsgs, sucMsgs []string,
+cmp templ.Component,
+) {
+@layout.Base(title, username, fromProtected, isError, errMsgs, sucMsgs) {
+@cmp
+}
+}

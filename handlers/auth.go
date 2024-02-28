@@ -146,7 +146,7 @@ func (ah *AuthHandler) loginHandler(c echo.Context) error {
 
 		setFlashmessages(c, "success", "You are now logged in!")
 
-		return c.Redirect(http.StatusSeeOther, "/player")
+		return c.Redirect(http.StatusSeeOther, "/")
 	}
 
 	return renderView(c, auth_views.LoginIndex(
@@ -165,14 +165,14 @@ func (ah *AuthHandler) authMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 		sess, _ := session.Get(auth_sessions_key, c)
 		if auth, ok := sess.Values[auth_key].(bool); !ok || !auth {
 			fromProtected = false
-			return echo.NewHTTPError(http.StatusUnauthorized, "Unauthorized")
+			return echo.NewHTTPError(echo.ErrUnauthorized.Code, "Unauthorized")
 		}
 
 		if userId, ok := sess.Values[user_id_key].(int); ok && userId != 0 {
 			c.Set(user_id_key, userId)
 		}
 
-		if username, ok := sess.Values[username_key].(string); !ok && len(username) != 0 {
+		if username, ok := sess.Values[username_key].(string); ok && len(username) != 0 {
 			c.Set(username_key, username)
 		}
 

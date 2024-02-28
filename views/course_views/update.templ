@@ -1,0 +1,26 @@
+package course_views
+
+import (
+	"fmt"
+	"strconv"
+
+	"github.com/herdgolf/herdgolf/services"
+)
+
+templ UpdateCourse(course services.Course, tz string) {
+	<h1>Update Course - { course.Name }</h1>
+	<section>
+		<form method="post" hx-swap="transition:true">
+			Course Name:
+			<input type="text" name="name" value={ course.Name } required autofocus minlength="3" maxlength="64"/>
+			Par
+			<input type="number" name="par" value={ strconv.Itoa(course.Par) } required autofocus min="60" max="74"/>
+			<footer>
+				<button>Save</button>
+				<a href={ templ.URL(fmt.Sprintf("/course/details/%d", course.ID)) }>
+					Cancel
+				</a>
+			</footer>
+		</form>
+	</section>
+}

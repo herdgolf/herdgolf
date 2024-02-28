@@ -1,0 +1,70 @@
+package scorecard_views
+
+import (
+"github.com/herdgolf/herdgolf/services"
+"github.com/herdgolf/herdgolf/views/layout"
+"strconv"
+
+"fmt"
+)
+
+templ ScoreCardList(scoreCards []*services.ScoreCard) {
+<h1>Courses List</h1>
+<a href="/scorecard/create" hx-swap="transition:true">
+  Add ScoreCard
+</a>
+<section>
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Course Name</th>
+        <th>Tee</th>
+        <th>Par</th>
+        <th>Slope</th>
+        <th>Rating</th>
+      </tr>
+    </thead>
+    if len(scoreCards) != 0 {
+    <tbody>
+      for _, scorecard := range scoreCards {
+      <tr>
+        <th>{ strconv.Itoa(int(scorecard.CourseID)) }</th>
+        <td>
+          <a hx-swap="transition:true" hx-headers="js:{'X-TimeZone': Intl.DateTimeFormat().resolvedOptions().timeZone}"
+            class="" href={ templ.URL(fmt.Sprintf("/scorecard/details/%d", scorecard.ID)) }>
+            { scorecard.Tee }
+            <img src="/img/info_icon.svg" alt="Info icon" />
+          </a>
+        </td>
+        <td>{ strconv.Itoa(int(scorecard.Par)) }</td>
+        <td>{ strconv.Itoa(int(scorecard.Slope)) }</td>
+        <td>{ strconv.FormatFloat(scorecard.Rating,'f',-1, 64) }</td>
+      </tr>
+      }
+    </tbody>
+    } else {
+    <tbody>
+      <tr>
+        <td>
+          There are no scorecards to show yet
+        </td>
+      </tr>
+    </tbody>
+    }
+  </table>
+</section>
+}
+
+templ ScoreCardIndex(
+title,
+username string,
+fromProtected bool,
+isError bool,
+errMsgs, sucMsgs []string,
+cmp templ.Component,
+) {
+@layout.Base(title, username, fromProtected, isError, errMsgs, sucMsgs) {
+@cmp
+}
+}

@@ -1,0 +1,19 @@
+package course_views
+
+templ CreateCourse() {
+	<h1>Create Course</h1>
+	<section>
+		<form method="post" hx-swap="transition:true">
+			Course Name:
+			<input type="text" name="name" placeholder="My course name" required autofocus minlength="3" maxlength="64"/>
+			Par
+			<input type="number" name="par" required autofocus min="60" max="74" placeholder="72"/>
+			<footer>
+				<button>Save</button>
+				<a href="/course">
+					Cancel
+				</a>
+			</footer>
+		</form>
+	</section>
+}

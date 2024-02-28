@@ -1,0 +1,69 @@
+package course_views
+
+import (
+	"github.com/herdgolf/herdgolf/services"
+	"github.com/herdgolf/herdgolf/views/layout"
+	"strconv"
+
+	"fmt"
+)
+
+templ CourseList(courses []*services.Course) {
+	<h1>Courses List</h1>
+	<a href="/course/create" hx-swap="transition:true">
+		Add Course
+	</a>
+	<section>
+		<table>
+			<thead>
+				<tr>
+					<th></th>
+					<th>Course Name</th>
+					<th>Par</th>
+				</tr>
+			</thead>
+			if len(courses) != 0 {
+				<tbody>
+					for _, course := range courses {
+						<tr>
+							<th>{ strconv.Itoa(int(course.ID)) }</th>
+							<td>
+								<a
+									hx-swap="transition:true"
+									hx-headers="js:{'X-TimeZone': Intl.DateTimeFormat().resolvedOptions().timeZone}"
+									class=""
+									href={ templ.URL(fmt.Sprintf("/course/details/%d", course.ID)) }
+								>
+									{ course.Name }
+									<img src="/img/info_icon.svg" alt="Info icon"/>
+								</a>
+							</td>
+							<td>{ strconv.Itoa(int(course.Par)) }</td>
+						</tr>
+					}
+				</tbody>
+			} else {
+				<tbody>
+					<tr>
+						<td>
+							There are no courses to show yet
+						</td>
+					</tr>
+				</tbody>
+			}
+		</table>
+	</section>
+}
+
+templ CourseIndex(
+title,
+username string,
+fromProtected bool,
+isError bool,
+errMsgs, sucMsgs []string,
+cmp templ.Component,
+) {
+	@layout.Base(title, username, fromProtected, isError, errMsgs, sucMsgs) {
+		@cmp
+	}
+}

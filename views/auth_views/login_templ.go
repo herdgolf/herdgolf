@@ -25,7 +25,7 @@ func Login(fromProtected bool) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"card w-fit bg-base-200 shadow-xl mx-auto mb-8\"><div class=\"card-body pb-2\"><h1 class=\"card-title border-b border-b-slate-600 pb-[4px]\">Log In</h1><form hx-swap=\"transition:true\" hx-headers=\"js:{&#39;X-TimeZone&#39;: Intl.DateTimeFormat().resolvedOptions().timeZone}\" class=\"rounded-xl drop-shadow-xl flex flex-col gap-4 w-96 p-8\" action=\"\" method=\"post\"><label class=\"flex flex-col justify-start gap-2\">Email: <input class=\"input input-bordered input-primary bg-slate-800\" type=\"email\" name=\"email\" required autofocus")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"\"><div class=\"\"><h1 class=\"\">Log In</h1><form hx-swap=\"transition::{&#39;X-TimeZone&#39;: Intl.DateTimeFormat().resolvedOptions().timeZone}\" class=\"\" action=\"\" method=\"post\">Email: <input class=\"input input-bordered input-primary bg-slate-800\" type=\"email\" name=\"email\" required autofocus")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -35,7 +35,7 @@ func Login(fromProtected bool) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("></label> <label class=\"flex flex-col justify-start gap-2\">Password: <input class=\"input input-bordered input-primary bg-slate-800\" type=\"password\" name=\"password\" required minlength=\"6\"")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("> Password: <input class=\"input input-bordered input-primary bg-slate-800\" type=\"password\" name=\"password\" required minlength=\"6\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -45,7 +45,7 @@ func Login(fromProtected bool) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("></label><footer class=\"card-actions justify-end\"><button class=\"badge badge-primary px-6 py-4 hover:scale-[1.1]\"")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("><footer class=\"\"><button class=\"\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

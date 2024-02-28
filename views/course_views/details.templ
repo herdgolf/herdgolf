@@ -1,0 +1,60 @@
+package course_views
+
+import (
+"fmt"
+"strconv"
+"github.com/herdgolf/herdgolf/services"
+"github.com/herdgolf/herdgolf/views/layout"
+)
+
+templ Details(tz string, course services.Course) {
+<h1>
+  Course details
+</h1>
+<a hx-swap="transition:true" href={ templ.URL(fmt.Sprintf("/course/edit/%d", course.ID)) }>
+  Edit
+</a>
+<a hx-swap="transition:true" href={ templ.URL("/scorecard/create") }>
+  Add ScoreCard
+</a>
+<article>
+  <header>
+    <mark>
+      { course.Name } - Par { strconv.Itoa(course.Par) }
+    </mark>
+  </header>
+  for _, scorecard := range course.ScoreCards {
+  <details>
+    <summary>Tee: { scorecard.Tee }</summary>
+    <a hx-swap="transition:true" href={ templ.URL(fmt.Sprintf("/course/edit/%d", course.ID)) }>
+      Edit
+    </a>
+    <p>
+      Par: { strconv.Itoa(scorecard.Par) } | Slope: { strconv.Itoa(scorecard.Slope) } | Rating: {
+      strconv.FormatFloat(scorecard.Rating,'f',-1, 64) }
+    </p>
+    <p hx-get={ fmt.Sprintf("/scorecard/details/%d", scorecard.ID) } hx-trigger="load">ScoreCard</p>
+  </details>
+  }
+  <footer>
+    <a hx-swap="transition:true" href="/course">
+      <p>
+        &larr; Back to Course List
+      </p>
+    </a>
+  </footer>
+</article>
+}
+
+templ DetailsIndex(
+title,
+username string,
+fromProtected bool,
+isError bool,
+errMsgs, sucMsgs []string,
+cmp templ.Component,
+) {
+@layout.Base(title, username, fromProtected, isError, errMsgs, sucMsgs) {
+@cmp
+}
+}

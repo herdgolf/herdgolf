@@ -29,7 +29,7 @@ func Details(tz string, player services.Player) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<h1 class=\"text-3xl text-center font-bold capitalize\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<h1>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -42,46 +42,55 @@ func Details(tz string, player services.Player) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</h1><section class=\"card w-96 bg-base-300 shadow-xl mx-auto mt-12\"><div class=\"card-body flex flex-col gap-6\"><h1 class=\"card-title capitalize text-secondary text-2xl italic\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</h1><a hx-swap=\"transition:true\" href=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var3 string
-		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(player.Username)
-		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/player/details.templ`, Line: 15, Col: 23}
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
+		var templ_7745c5c3_Var3 templ.SafeURL = templ.URL(fmt.Sprintf("/player/edit/%d", player.ID))
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(string(templ_7745c5c3_Var3)))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</h1><ul class=\"flex flex-col gap-2 list-disc marker:text-secondary text-sm text-secondary font-semibold\"><li>Email:&nbsp;&nbsp; <span class=\"text-neutral-content font-light\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\">Edit</a><article><header><mark>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var4 string
-		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(player.Email)
+		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(player.Username)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/player/details.templ`, Line: 21, Col: 24}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/player/details.templ`, Line: 18, Col: 23}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</span></li><li>Created At:&nbsp;&nbsp; <span class=\"text-neutral-content font-light\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</mark></header><ul><li>Email:&nbsp;&nbsp; <span>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var5 string
-		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(services.ConverDateTime(tz, player.CreatedAt))
+		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(player.Email)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/player/details.templ`, Line: 27, Col: 57}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/player/details.templ`, Line: 25, Col: 22}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</span></li></ul><div class=\"divider divider-secondary -m-4\"></div><div class=\"card-actions justify-end\"><a hx-swap=\"transition:true\" class=\"block w-fit h-fit badge badge-outline hover:scale-[1.03] ease-in duration-300\" href=\"/player\"><p class=\"m-1\">&larr; Back to Player List</p></a></div></div></section>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</span></li><li>Created At:&nbsp;&nbsp; <span>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var6 string
+		templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(services.ConverDateTime(tz, player.CreatedAt))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/player/details.templ`, Line: 31, Col: 55}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</span></li></ul><footer><a hx-swap=\"transition:true\" href=\"/player\"><p>&larr; Back to Player List</p></a></footer></article>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -107,12 +116,12 @@ func DetailsIndex(
 			defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 		}
 		ctx = templ.InitializeContext(ctx)
-		templ_7745c5c3_Var6 := templ.GetChildren(ctx)
-		if templ_7745c5c3_Var6 == nil {
-			templ_7745c5c3_Var6 = templ.NopComponent
+		templ_7745c5c3_Var7 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var7 == nil {
+			templ_7745c5c3_Var7 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Var7 := templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
+		templ_7745c5c3_Var8 := templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 			templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 			if !templ_7745c5c3_IsBuffer {
 				templ_7745c5c3_Buffer = templ.GetBuffer()
@@ -127,7 +136,7 @@ func DetailsIndex(
 			}
 			return templ_7745c5c3_Err
 		})
-		templ_7745c5c3_Err = layout.Base(title, username, fromProtected, isError, errMsgs, sucMsgs).Render(templ.WithChildren(ctx, templ_7745c5c3_Var7), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = layout.Base(title, username, fromProtected, isError, errMsgs, sucMsgs).Render(templ.WithChildren(ctx, templ_7745c5c3_Var8), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

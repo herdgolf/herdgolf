@@ -1,0 +1,25 @@
+package scorecard_views
+
+templ CreateScoreCard() {
+<h1>Create Score Card</h1>
+<section>
+  <form method="post" hx-swap="transition:true">
+    Tee:
+    <input type="text" name="tee" placeholder="Tee Name or Color" required autofocus minlength="3" maxlength="64" />
+    Par
+    <input type="number" name="par" required autofocus min="60" max="74" placeholder="72" />
+    Slope:
+    <input type="number" name="slope" required autofocus min="80" max="150" placeholder="120" />
+    Rating:
+    <input type="number" name="rating" step="any" required autofocus min="65.0" max="80.0" placeholder="71.0" />
+    Course ID:
+    <input type="number" name="courseId" required autofocus min="1" max="100" placeholder="1" />
+    <footer>
+      <button>Save</button>
+      <a href="/course">
+        Cancel
+      </a>
+    </footer>
+  </form>
+</section>
+}

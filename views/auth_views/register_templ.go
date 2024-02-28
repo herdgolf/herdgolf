@@ -26,12 +26,12 @@ func Register(fromProtected bool) templ.Component {
 		}
 		ctx = templ.ClearChildren(ctx)
 		if fromProtected {
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"card w-fit bg-base-200 shadow-xl mx-auto mb-8\"><div class=\"card-body pb-2\"><h1 class=\"card-title border-b border-b-slate-600 pb-[4px]\">Already Registered</h1></div></section>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section><h1>Already Registered</h1></section>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 		} else {
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"card w-fit bg-base-200 shadow-xl mx-auto mb-8\"><div class=\"card-body pb-2\"><h1 class=\"card-title border-b border-b-slate-600 pb-[4px]\">Register User</h1><form hx-swap=\"transition:true\" class=\"rounded-xl drop-shadow-xl flex flex-col gap-4 w-96 p-8\" action=\"\" method=\"post\"><label class=\"flex flex-col justify-start gap-2\">Email: <input class=\"input input-bordered input-primary bg-slate-800\" type=\"email\" name=\"email\" required autofocus")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section><h1>Register User</h1><form hx-swap=\"transition:true\" class=\"\" action=\"\" method=\"post\">Email: <input type=\"email\" name=\"email\" placeholder=\"Email\" autocomplete=\"email\" required autofocus")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -41,7 +41,7 @@ func Register(fromProtected bool) templ.Component {
 					return templ_7745c5c3_Err
 				}
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("></label> <label class=\"flex flex-col justify-start gap-2\">Password: <input class=\"input input-bordered input-primary bg-slate-800\" type=\"password\" name=\"password\" required minlength=\"6\"")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("> Password: <input type=\"password\" name=\"password\" placeholder=\"Password\" required minlength=\"6\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -51,7 +51,7 @@ func Register(fromProtected bool) templ.Component {
 					return templ_7745c5c3_Err
 				}
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("></label> <label class=\"flex flex-col justify-start gap-2\">Username: <input class=\"input input-bordered input-primary bg-slate-800\" type=\"text\" name=\"username\" required minlength=\"4\" maxlength=\"64\"")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("> Username: <input type=\"text\" name=\"username\" required minlength=\"4\" placeholder=\"Username\" maxlength=\"64\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -61,7 +61,7 @@ func Register(fromProtected bool) templ.Component {
 					return templ_7745c5c3_Err
 				}
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("></label><footer class=\"card-actions justify-end\"><button class=\"badge badge-primary px-6 py-4 hover:scale-[1.1]\"")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("><footer><button")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -71,7 +71,7 @@ func Register(fromProtected bool) templ.Component {
 					return templ_7745c5c3_Err
 				}
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(">Register User</button></footer></form></div></section>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(">Register User</button></footer></form></section>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
